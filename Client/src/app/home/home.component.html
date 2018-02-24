@@ -1,0 +1,19 @@
+<button [routerLink]="['../new']">Add A Pet</button>
+<table border=1>
+	 <thead>
+	<tr>
+		<td>Name</td>
+		<td>Type</td>
+		<td>Action</td>
+	</tr>
+</thead>
+<ng-container *ngFor="let pet of pets">
+
+	<tr>
+    <td>{{pet.name}}</td>
+    <td>{{pet.type}}</td>
+    <td><button [routerLink] = "['../details']" (click) = "sendData(pet._id)">Details</button><button [routerLink] = "['../edit']" (click) = "sendData(pet._id)">Edit</button></td>
+</tr>
+<!--    <button (click) = "deleteOne(pet._id)">Delete</button>-->
+</ng-container>
+</table>

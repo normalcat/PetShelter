@@ -1,0 +1,24 @@
+<p>
+Details about {{onePet.name}}
+</p>
+<p>
+Pet type: {{onePet.type}}
+</p>
+<p>
+Description: {{onePet.description}}
+</p>
+<p>
+Skill1: {{onePet.skill1}} 
+</p>
+<p>
+Skill2: {{onePet.skill2}} 
+</p>
+<p>
+Skill3: {{onePet.skill3}} 
+</p>
+
+<p>
+Likes: {{onePet.like}}
+</p>
+<button [routerLink] = "['../details']" (click) = "likePetFront(onePet._id)">Like this pet</button>
+<button [routerLink] = "['../details']">Adapt this pet</button>
