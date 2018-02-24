@@ -88,8 +88,6 @@ app.get('/pets/:id', function(req, res) {
 });
 
 app.put('/pets/like/:id', function(req, res) {
-      console.log("IM here");
-      console.log(req.params);
       Pet.findById({_id: req.params.id}, function(err, pet) {
       if(err){
         console.log(err);
@@ -108,8 +106,6 @@ app.put('/pets/like/:id', function(req, res) {
 });
 
 app.put("/pets/:id", function (req, res){
-    console.log("its in the put");
-    console.log(req.body);
     Pet.findById(req.body._id, function(err, pet) {
 //    Task.update({_id: req.params.id}, {$set: {title: req.body.name, description: req.body.desc, completed: true}}, function(err, animals){    
     // if there is an error console.log that something went wrong!
@@ -128,104 +124,16 @@ app.put("/pets/:id", function (req, res){
           if(err){
             console.log({error: err});
           }else{
-            res.json({success: "successfully updated a task!"});
+            res.json({success: "successfully updated a pet"});
           }
       })
     }
    })
 });
 
-/*
-app.post('/quotes/:id', function(req, res) {
-        var newQuote = {quote: req.body.quote, votes: 0};
-        console.log(newQuote);
-        console.log("posting new quote:", req.body.quote);
-        Author.update({_id: req.params.id}, {$push: {quotes: newQuote}}, function(err, results) {
-            if (err) {
-                console.log(err);
-                res.json({error: err});
-            } else {
-                res.json({success: results});
-            }
-        })
-    });
-
-  app.put('/quotes/up/:id', function(req, res) {
-        console.log(req.body.index);
-        Author.findById(req.params.id, function(err, author) {
-            if (err) {
-                res.json({error: err});
-            } else {
-                let allQuotes = author.quotes;
-                allQuotes[req.body.index].votes += 1;
-                author.update({quotes: allQuotes}, function(err, db_res) {
-                    if (err) {
-                        res.json({error: err});
-                    } else {
-                        res.json({success: db_res});
-                    }
-                });
-            }
-        });
-    });
-
-  app.put('/quotes/down/:id', function(req, res) {
-        console.log(req.body.index);
-        Author.findById(req.params.id, function(err, author) {
-            if (err) {
-                res.json({error: err});
-            } else {
-                let allQuotes = author.quotes;
-                allQuotes[req.body.index].votes -= 1;
-                author.update({quotes: allQuotes}, function(err, db_res) {
-                    if (err) {
-                        res.json({error: err});
-                    } else {
-                        res.json({success: db_res});
-                    }
-                });
-            }
-        });
-    });
-
-// Delete specific comment
-
-app.put('/quotes/delete/:id', function(req, res) {
-        console.log(req.body.index);
-        Author.findById(req.params.id, function(err, author) {
-            if (err) {
-                res.json({error: err});
-            } else {
-                let allQuotes = author.quotes;
-                var newQuotes = [];
-                for (var i = 0; i < allQuotes.length; i+=1){
-                  if(i != req.body.index){
-                    console.log(i);
-                    newQuotes.push(allQuotes[i]);
-                  }
-                }
-                author.update({quotes: newQuotes}, function(err, db_res) {
-                    if (err) {
-                        res.json({error: err});
-                    } else {
-                        res.json({success: db_res});
-                    }
-                });
-            }
-        });
-
-//        var index = req.body.index;
-//        Author.update({_id: req.params.id}, )
-});
-/*
-deleteQuote(quoteIndex) {
-        let url = '/quotes/' + this.authorId + '/delete';
-        return this._http.delete(url, quoteIndex);
-    }
-*/
-/*
-app.delete("/authors/:id", function (req, res){
-    Author.findByIdAndRemove({_id: req.params.id}, function(err, person) {
+app.delete("/pets/:id", function (req, res){
+    console.log(req.body);
+    Pet.findByIdAndRemove({_id: req.params.id}, function(err, pet) {
       if(err){
         console.log(err);
         res.json({error: err});
@@ -234,12 +142,10 @@ app.delete("/authors/:id", function (req, res){
       }
     });
 });
-*/
-/*
+
 app.all("*",(req,res,next) => {
   res.sendfile(path.resolve('./Client/dist/index.html'));
 })
-*/
 // Setting our Server to Listen on Port: 8000
 app.listen(8000, function() {
     console.log("listening on port 8000");

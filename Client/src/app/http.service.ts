@@ -37,9 +37,15 @@ export class HttpService {
 
    editOnePet(ID, pet){
    		let url = "/pets/" + ID;
-   		console.log(pet);
-   		console.log(url);
+   		//console.log(pet);
+   		//console.log(url);
    		return this._http.put(url, pet);
+   }
+
+   deleteOnePet(ID){
+     let url = '/pets/' + ID;
+     console.log("In http servie " + url);
+     return this._http.delete(url);
    }
 
 }

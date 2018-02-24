@@ -29,4 +29,9 @@ export class HomeComponent implements OnInit {
   sendData(petID) {
         this._httpService.setID(petID);
     }
+
+  deleteOne(petID){
+    console.log("we are inside the function" + petID);
+    this._httpService.deleteOnePet(petID)
+  }
 }

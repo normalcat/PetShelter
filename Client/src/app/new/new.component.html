@@ -10,7 +10,6 @@ Know of a pet needing a home?
 
 <br>
 <!--<input type="button" value="Add pet" (click) = "submitPet()" [routerLink] = "['../home']">-->
-<button [routerLink]="['../home']">Cancel</button>
 <br>
 <br>
 <form (submit)="submitPet()">
@@ -45,5 +44,6 @@ Know of a pet needing a home?
  	skill1:  <input type="text" name="newPet.skill1" [(ngModel)]="newPet.skill1"><br><br>
  	skill2:  <input type="text" name="newPet.skill2" [(ngModel)]="newPet.skill2"><br><br>
  	skill3:  <input type="text" name="newPet.skill3" [(ngModel)]="newPet.skill3"><br><br><br><br>
- 	<input type="submit">
+ 	<input type="submit"> <button [routerLink]="['../home']">Cancel</button>
  </form>
+
