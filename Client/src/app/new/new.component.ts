@@ -26,12 +26,12 @@ export class NewComponent implements OnInit {
         let observable = this._httpService.addPet(this.newPet);
         observable.subscribe(response => {
             let data = response as any;
+
             if(data.error){
-              console.log(data.error);
-              if(data.error.message){
+              if(data.error.errmsg){
+                this.errors = "Duplicated data";
+              }else if(data.error.message){
                 this.errors = data.error.message;
-              }else{
-                this.errors = data.error;
               }
             }else{
               this._router.navigate(['']);

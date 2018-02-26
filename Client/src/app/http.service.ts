@@ -43,12 +43,17 @@ export class HttpService {
    }
 
    deleteOnePet(ID){
-     let url = '/pets/' + ID;
+     let url = "/pets/" + ID;
+     console.log("HTTP service " + url);
+     return this._http.delete(url);
+   }
+/*
+   deleteOnePet(ID){
+     let url = '/pets/'+ ID;
      console.log("In http servie " + url);
      return this._http.delete(url)
    }
  
-/*
    deleteOnePet(ID){
      let url = '/pets/delete/' + ID;
      console.log("In http servie " + url);

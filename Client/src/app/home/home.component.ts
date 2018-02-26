@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,10 @@ import { HttpService } from '../http.service';
 export class HomeComponent implements OnInit {
 	pets: any;
 
-  constructor(private _httpService: HttpService) { }
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _httpService: HttpService) {}
 
   ngOnInit() {
   	this.getAllPets();
@@ -31,6 +35,9 @@ export class HomeComponent implements OnInit {
 
   deleteOne(petID){
     console.log("we are inside the function" + petID);
-    this._httpService.deleteOnePet(petID);
+    let observable = this._httpService.deleteOnePet(petID);
+    observable.subscribe(response => {    //need to subscribe, otherwise it won't call the server
+      this._router.navigate(['']);
+    })
   }
 }

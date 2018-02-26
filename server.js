@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '/Client/dist')));
 app.set('views', path.join(__dirname, './views'));
 
 var PetSchema = new mongoose.Schema({
- name: {required: true, type: String, minlength: [3, "Name should be at least 3 characters."]},
+ name: {unique: true, required: true, type: String, minlength: [3, "Name should be at least 3 characters."]},
  type: {required: true, type: String, minlength: [3, "Type should be at least 3 characters."]},
  description: {required: true, type: String, minlength: [3, "Description should be at least 3 characters."]},
  like: {type: Number},
@@ -33,20 +33,19 @@ var Pet = mongoose.model('Pet');
 // Use native promises
 mongoose.Promise = global.Promise;
 
+app.all('*', function(req, res, next){
+  console.log(req.url);
+  next();
+})
+
 app.post('/new', function(req, res) {
-  Pet.find({name: req.body.name}, function(err, db_res){
-    if(db_res.length!=0){
-      res.json({error: "Duplicated pet name"});
-    }else{
-      let pet = new Pet({name: req.body.name, type: req.body.type, description: req.body.description, like: 0, skill1: req.body.skill1, skill2: req.body.skill2, skill3: req.body.skill3});
-      // Try to save that new user to the database (this is the method that actually inserts into the db) and run a callback function with an error (if any) from the operation.
-      pet.save(function(err, db_res) {
-      if(err){
-        res.json({error: err});
-      } else { // else console.log that we did well and then redirect to the root route
-        res.json({success: "successfully added a pet!"});
-      }
-      })
+  let pet = new Pet({name: req.body.name, type: req.body.type, description: req.body.description, like: 0, skill1: req.body.skill1, skill2: req.body.skill2, skill3: req.body.skill3});
+  // Try to save that new user to the database (this is the method that actually inserts into the db) and run a callback function with an error (if any) from the operation.
+  pet.save(function(err, db_res) {
+    if(err){
+      res.json({error: err});
+    } else { // else console.log that we did well and then redirect to the root route
+      res.json({success: "successfully added a pet!"});
     }
   })
 })
@@ -93,8 +92,6 @@ app.put('/pets/like/:id', function(req, res) {
 });
 
 app.put("/pets/:id", function (req, res){
-//  console.log("UPDATE");
-//  console.log(req.body);
     Pet.findById(req.body._id, function(err, pet) {
 //    Task.update({_id: req.params.id}, {$set: {title: req.body.name, description: req.body.desc, completed: true}}, function(err, animals){    
     // if there is an error console.log that something went wrong!
@@ -120,19 +117,7 @@ app.put("/pets/:id", function (req, res){
    })
 });
 
-app.get('/pets/:id', function (req, res){
-  console.log(req.body);
-    Pet.findByIdAndRemove({_id: req.params.id}, function(err, pet) {
-      if(err){
-        res.json({error: err});
-      }else{
-        res.json({success: "Delete successfully"});                                                                                         
-      }
-    });
-});
-
 app.delete('/pets/:id', function (req, res){
-    console.log('here');
     Pet.findByIdAndRemove({_id: req.params.id}, function(err, pet) {
       if(err){
         console.log(err);
@@ -148,5 +133,5 @@ app.all("*",(req,res,next) => {
 })
 // Setting our Server to Listen on Port: 8000
 app.listen(8000, function() {
-    console.log("listening on port 8000");
+    console.log("listening on port 8000!");
 })
