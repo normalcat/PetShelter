@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class NewComponent implements OnInit {
 	newPet: any;
-
+  errors: String;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -22,21 +22,20 @@ export class NewComponent implements OnInit {
     this._route.params.subscribe((params: Params) => console.log(params['id']));
   }
 
-  goHome() {
-    this._router.navigate(['/home']);
-  }
-
   submitPet(){
-  	let observable = this._httpService.addPet(this.newPet);
+        let observable = this._httpService.addPet(this.newPet);
         observable.subscribe(response => {
             let data = response as any;
             if(data.error){
-
+              console.log(data.error);
+              if(data.error.message){
+                this.errors = data.error.message;
+              }else{
+                this.errors = data.error;
+              }
+            }else{
+              this._router.navigate(['']);
             }
-            console.log(data);
         })
-        this.newPet = {name: '', type: '', description: '', skill1: '', skill2: '', skill3: ''};
-    this.goHome();
-  }
-
+      }
 }

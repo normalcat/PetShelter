@@ -1,10 +1,11 @@
-<p>
-Edit this pet
-</p>
+
+<div style="color:red;">
+{{errors}}
+</div>
 
 <br>
 <br>
-<form (submit)="submitPet()">
+<form>
  Pet name: <input type="text" name="onePet.name" [(ngModel)]="onePet.name">
  <br><br>
  Pet type: <input type="text" name="onePet.type" [(ngModel)]="onePet.type">
@@ -16,7 +17,6 @@ Edit this pet
  	skill1:  <input type="text" name="onePet.skill1" [(ngModel)]="onePet.skill1"><br><br>
  	skill2:  <input type="text" name="onePet.skill2" [(ngModel)]="onePet.skill2"><br><br>
  	skill3:  <input type="text" name="onePet.skill3" [(ngModel)]="onePet.skill3"><br><br><br><br>
-
-<input type="button" value="Edit pet" (click) = "submitEdit(onePet._id)" [routerLink] = "['/details']">
+ </form>
+<input type="button" value="Edit pet" (click) = "submitEdit(onePet._id)">
 <button [routerLink]="['']">Cancel</button>
- 

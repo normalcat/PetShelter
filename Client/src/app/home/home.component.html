@@ -15,9 +15,8 @@
     <td>
     	<button [routerLink] = "['/details']" (click) = "sendData(pet._id)">Details</button>
     	<button [routerLink] = "['/edit']" (click) = "sendData(pet._id)">Edit</button>
-    	<button [routerLink] = "['']" (click) = "deleteOne(pet._id)">Delete</button>
+    	<button (click) = "deleteOne(pet._id)">Delete</button>
     </td>
 </tr>
-<!--    <button (click) = "deleteOne(pet._id)">Delete</button>-->
 </ng-container>
 </table>

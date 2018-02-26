@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
         let observable = this._httpService.getPets();
         observable.subscribe(response => {
             let data = response as any;
-            console.log(data);
             this.pets = data.pets;
         });
         
@@ -32,6 +31,6 @@ export class HomeComponent implements OnInit {
 
   deleteOne(petID){
     console.log("we are inside the function" + petID);
-    this._httpService.deleteOnePet(petID)
+    this._httpService.deleteOnePet(petID);
   }
 }

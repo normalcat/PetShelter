@@ -1,18 +1,20 @@
 <p>
 Know of a pet needing a home?
 </p>
-
-<ng-container *ngFor="let error of errors">
-    {{error}}
+<!--
+<div ng-if="errorMessage">{{ errorMessage }}</div>
+-->
+<div style="color:red;">
+<!--<ng-container *ngFor="let error of errors">-->
+    {{errors}}
 <!--    <button (click) = "deleteOne(pet._id)">Delete</button>-->
-</ng-container>
+<!--</ng-container>-->
+</div>
 
-
-<br>
-<!--<input type="button" value="Add pet" (click) = "submitPet()" [routerLink] = "['../home']">-->
 <br>
 <br>
-<form (submit)="submitPet()">
+<!--<form (submit)="submitPet()">-->
+<form>
  Pet name: <input type="text" name="newPet.name"
  required
  minlength = '3'
@@ -44,6 +46,7 @@ Know of a pet needing a home?
  	skill1:  <input type="text" name="newPet.skill1" [(ngModel)]="newPet.skill1"><br><br>
  	skill2:  <input type="text" name="newPet.skill2" [(ngModel)]="newPet.skill2"><br><br>
  	skill3:  <input type="text" name="newPet.skill3" [(ngModel)]="newPet.skill3"><br><br><br><br>
- 	<input type="submit"> <button [routerLink]="['../home']">Cancel</button>
- </form>
+ 	</form>
+ 	<input type="button" value="Add A Pet" (click) = "submitPet()">
+ 	<button [routerLink]="['']">Cancel</button>
 

@@ -10,6 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class EditComponent implements OnInit {
 	onePetID: any;
   	onePet = {name: "", type: "", description: "", skill1: "", skill2:"", skill3: ""};
+    errors:String;
 
   constructor(
   	private _route: ActivatedRoute,
@@ -32,19 +33,32 @@ export class EditComponent implements OnInit {
     }
 
     submitEdit(ID){
-    	console.log(this.onePet);
-    	let observable = this._httpService.editOnePet(ID, this.onePet);
+    	if(this.validation()){
+    	  let observable = this._httpService.editOnePet(ID, this.onePet);
         observable.subscribe(response => {
         	let data = response as any;
-//            this.onePet = data.pets[0];
-            console.log(data);
-            this.goDetails();
+          if(data.error){
+            console.log();
+            this.errors = data.error.message;
+          }else{
+            this._router.navigate(['/details']);
+          }
         })
+      }
     }
 
-   goDetails() {
-    this._router.navigate(['../details']);
+  validation(){
+    if(this.onePet.name.length < 3){
+      this.errors = "Name needs to be at least 3 characters.";
+      return false;
+    }else if(this.onePet.type.length < 3){
+      this.errors = "Type needs to be at least 3 characters";
+      return false;
+    }else if(this.onePet.description.length < 3){
+      this.errors = "Description needs to be at least 3 characters";
+      return false;
+    }
+    return true;
   }
-
 
 }
