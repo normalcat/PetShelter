@@ -100,7 +100,7 @@ app.put("/pets/:id", function (req, res){
       description: req.body.description,
       skill1: req.body.skill1,
       skill2: req.body.skill2,
-      skill3: req.body.skill3}}, function(err, db_res){    
+      skill3: req.body.skill3}}, { runValidators: true }, function(err, db_res){    
     // if there is an error console.log that something went wrong!
     if(err) {
       console.log('something went wrong');

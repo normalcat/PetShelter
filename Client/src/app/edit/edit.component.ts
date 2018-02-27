@@ -48,6 +48,7 @@ export class EditComponent implements OnInit {
     }
 
   validation(){
+    /*
     if(this.onePet.name.length < 3){
       this.errors = "Name needs to be at least 3 characters.";
       return false;
@@ -58,7 +59,7 @@ export class EditComponent implements OnInit {
       this.errors = "Description needs to be at least 3 characters";
       return false;
     }
-
+*/
     return true;
   }
 
