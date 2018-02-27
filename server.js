@@ -92,27 +92,21 @@ app.put('/pets/like/:id', function(req, res) {
 });
 
 app.put("/pets/:id", function (req, res){
-    Pet.findById(req.body._id, function(err, pet) {
-//    Task.update({_id: req.params.id}, {$set: {title: req.body.name, description: req.body.desc, completed: true}}, function(err, animals){    
+//    Pet.findById(req.body._id, function(err, pet) {
+    console.log(req.body);
+    Pet.findByIdAndUpdate({_id: req.params.id}, {$set: {
+      name: req.body.name,
+      type: req.body.type,
+      description: req.body.description,
+      skill1: req.body.skill1,
+      skill2: req.body.skill2,
+      skill3: req.body.skill3}}, function(err, db_res){    
     // if there is an error console.log that something went wrong!
     if(err) {
       console.log('something went wrong');
       res.json({error: err});
     } else { // else console.log that we did well and then redirect to the root route
-      pet.name = req.body.name;
-      pet.type = req.body.type;
-      pet.description = req.body.description;
-      pet.skill1 = req.body.skill1;
-      pet.skill2 = req.body.skill2;
-      pet.skill3 = req.body.skill3;
-      console.log(pet.name);
-      pet.save(function (err, db_res) {
-          if(err){
-            console.log({error: err});
-          }else{
-            res.json({success: "successfully updated a pet"});
-          }
-      })
+      res.json({success: "successfully updated a pet"});
     }
    })
 });

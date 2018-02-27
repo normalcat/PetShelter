@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
         observable.subscribe(response => {
         	let data = response as any;
           if(data.error){
-            console.log();
+            console.log(data.error);
             this.errors = data.error.message;
           }else{
             this._router.navigate(['/details']);
@@ -58,6 +58,7 @@ export class EditComponent implements OnInit {
       this.errors = "Description needs to be at least 3 characters";
       return false;
     }
+
     return true;
   }
 
